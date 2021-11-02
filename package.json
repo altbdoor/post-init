@@ -1,6 +1,11 @@
 {
     "name": "post-init",
-    "version": "0.1",
+    "description": "Custom post init script for own use",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/altbdoor/post-init.git"
+    },
+    "version": "0.0.1",
     "main": "index.js",
     "bin": {
         "post-init": "index.js"
