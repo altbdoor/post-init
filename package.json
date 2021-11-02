@@ -1,0 +1,21 @@
+{
+    "name": "post-init",
+    "main": "index.js",
+    "bin": {
+        "post-init": "index.js"
+    },
+    "scripts": {
+        "pretty": "prettier --ignore-path .gitignore --write ./**/*.{json,js,html,css,ts}"
+    },
+    "license": "MIT",
+    "type": "module",
+    "devDependencies": {
+        "prettier": "^2.4.1"
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "semi": true,
+        "singleQuote": true,
+        "printWidth": 120
+    }
+}
