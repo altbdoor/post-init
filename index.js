@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { exit } from 'process';
 
 const getPackage = () => {
     const packageFile = readFileSync('package.json', { encoding: 'utf8' });
@@ -12,7 +11,7 @@ const setPackage = (packageContent) => {
     writeFileSync('package.json', JSON.stringify(packageContent, null, 4), {
         encoding: 'utf8',
     });
-}
+};
 
 if (!existsSync('package.json')) {
     console.error('`package.json` not found!');
@@ -41,16 +40,19 @@ const setupPrettier = () => {
 
     packageContent.devDependencies.prettier = '^2.0.0';
     setPackage(packageContent);
-}
+};
 
 const setupPrivate = () => {
     console.log('>> Cleaning up `package.json`...');
     const packageContent = getPackage();
 
-    ['name', 'version'].filter((key) => key in packageContent).forEach((key) => delete packageContent[key]);
+    ['name', 'version', 'description', 'repository', 'author', 'license', 'bugs', 'homepage']
+        .filter((key) => key in packageContent)
+        .forEach((key) => delete packageContent[key]);
+
     packageContent.private = true;
     setPackage(packageContent);
-}
+};
 
 const setupVite = () => {
     console.log('>> Setting up vite project...');
@@ -61,7 +63,7 @@ const setupVite = () => {
     }
 
     setPackage(packageContent);
-}
+};
 
 // ========================================
 
@@ -71,5 +73,4 @@ setupPrivate();
 const packageContent = getPackage();
 if (JSON.stringify(packageContent).includes('vite')) {
     setupVite();
-    exit();
 }
